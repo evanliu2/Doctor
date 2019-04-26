@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <Button
@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="144dp"
         android:text="Stop"
+        android:textColor="@color/lightgreen"
+        android:background="@color/darkgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.716"
@@ -28,6 +30,7 @@
         android:inputType="number"
         android:textAlignment="center"
         android:typeface="serif"
+        android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -41,6 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="144dp"
         android:text="Start"
+        android:background="@color/darkgreen"
+        android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.287"
@@ -50,11 +55,11 @@
         android:id="@+id/textView_main_beatnum"
         android:layout_width="338dp"
         android:layout_height="207dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:textAlignment="center"
+        android:textColor="@color/lightgreen"
         android:textSize="160sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="1" />
@@ -63,20 +68,22 @@
         android:id="@+id/checkBox_main_offbeats"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="76dp"
         android:text="Offbeats"
+        android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox_main_efirst"
         android:layout_width="wrap_content"
         android:layout_height="34dp"
-        android:layout_marginBottom="88dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="84dp"
         android:text="Emphasize First"
+        android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

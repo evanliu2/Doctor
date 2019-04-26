@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Doctor</string>
     <color name="lightblue">#aecbfc</color>
+    <color name="black">#000000</color>
+    <color name="lightgreen">#8fff3a</color>
+    <color name="darkgreen">#0f8700</color>
+    <color name="darkgray">#27292d</color>
+    <color name="darkestgray">#1c1e21</color>
 </resources>
+

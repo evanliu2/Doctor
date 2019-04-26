@@ -1,5 +1,8 @@
 package com.example.doctor;
 
+import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -94,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-
-                            //Add efirst for non-offbeat toggle
                             else if (offbeats.isChecked() == false) {
 
                                 if(count == 1 && efirst.isChecked())
