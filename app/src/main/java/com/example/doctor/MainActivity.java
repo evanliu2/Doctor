@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private int count;
     CountDownTimer countdown;
     public static final String TAG = MainActivity.class.getSimpleName();
+    private boolean stopped;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,12 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopped = false;
                 soundPool.autoPause();
                 soundPool.autoResume();
+
+                start.setEnabled(false);
+                stop.setEnabled(true);
 
                 //Empty?
                 if(bpm.length() != 0) {
@@ -150,6 +155,14 @@ public class MainActivity extends AppCompatActivity {
 
                 countdown.cancel();
                 soundPool.autoPause();
+
+                stopped = true;
+
+                if(stopped)
+                {
+                    start.setEnabled(true);
+                    stop.setEnabled(false);
+                }
 
             }
         });
