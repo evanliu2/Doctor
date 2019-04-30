@@ -16,6 +16,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView bpm;
@@ -43,105 +46,98 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPool.autoPause();
                 soundPool.autoResume();
-                if(bpm.length() != 0)
-                {
-                    userBpm = Integer.parseInt(bpm.getText().toString());
-                    final double beatsPerSec = userBpm / 60.0;
-                    int interval = (int)(1000/beatsPerSec);
-                    count = 1;
 
-                    if(offbeats.isChecked())
-                    {
-                        interval = (int)(0.5 * (int)(1000/beatsPerSec));
+                //Empty?
+                if(bpm.length() != 0) {
+
+                    //Too Long?
+                    if (Integer.parseInt(bpm.getText().toString()) > 300) {
+                        Toast.makeText(MainActivity.this, "Yeah...No...", Toast.LENGTH_SHORT).show();
                     }
 
-                    countdown = new CountDownTimer(Integer.MAX_VALUE, interval) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
+                    //No? Cool
+                    else {
 
-                            if (offbeats.isChecked()) {
+                        userBpm = Integer.parseInt(bpm.getText().toString());
+                        final double beatsPerSec = userBpm / 60.0;
+                        int interval = (int) (1000 / beatsPerSec);
+                        count = 1;
 
-                                if (count % 2 == 1) {
+                        if (offbeats.isChecked()) {
+                            interval = (int) (0.5 * (int) (1000 / beatsPerSec));
+                        }
 
-                                    if(count == 1 && efirst.isChecked())
-                                    {
+                        countdown = new CountDownTimer(Integer.MAX_VALUE, interval) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                                if (offbeats.isChecked()) {
+
+                                    if (count % 2 == 1) {
+
+                                        if (count == 1 && efirst.isChecked()) {
+                                            beatdisplay.setText(count + "");
+                                            soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
+                                            count++;
+                                        } else {
+                                            beatdisplay.setText(count + "");
+                                            soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+                                            count++;
+                                        }
+                                    }
+
+                                    else {
+                                        beatdisplay.setText(count + "");
+                                        soundPool.play(defaultBeat, 0.2f, 0.2f, 0, 0, 1);
+
+                                        if (count == 8) {
+                                            count = 1;
+                                        } else {
+                                            count++;
+                                        }
+                                    }
+                                }
+
+                                else if (offbeats.isChecked() == false) {
+
+                                    if (count == 1 && efirst.isChecked()) {
                                         beatdisplay.setText(count + "");
                                         soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
                                         count++;
                                     }
 
-                                    else
-                                    {
+                                    else {
                                         beatdisplay.setText(count + "");
                                         soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
-                                        count++;
+
+                                        if (count == 4) {
+                                            count = 1;
+                                        }
+                                        else {
+                                            count++;
+                                        }
                                     }
-                                }
-
-                                else {
-                                    beatdisplay.setText(count + "");
-                                    soundPool.play(defaultBeat, 0.2f, 0.2f, 0, 0, 1);
-
-                                    if(count == 8)
-                                    {
-                                        count = 1;
-                                    }
-
-                                    else
-                                    {
-                                        count++;
-                                    }
-
-                                }
-
-                            }
-
-                            else if (offbeats.isChecked() == false) {
-
-                                if(count == 1 && efirst.isChecked())
-                                {
-                                    beatdisplay.setText(count + "");
-                                    soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
-                                    count++;
-                                }
-
-                                else
-                                {
-                                    beatdisplay.setText(count + "");
-                                    soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
-
-                                    if(count == 4)
-                                    {
-                                        count = 1;
-                                    }
-
-                                    else
-                                    {
-                                        count++;
-                                    }
-
-
                                 }
                             }
 
-                        }
 
+                            @Override
+                            public void onFinish() {
+                                Toast.makeText(MainActivity.this, "done!", Toast.LENGTH_SHORT).show();
+                            }
+                        };
 
-                        @Override
-                        public void onFinish() {
-                            Toast.makeText(MainActivity.this, "done!", Toast.LENGTH_SHORT).show();
-                        }
-                    };
+                        countdown.start();
 
-                    countdown.start();
-
+                    }
                 }
 
                 else
-                {
-                    Toast.makeText(MainActivity.this, "Please Enter a Bpm!", Toast.LENGTH_SHORT).show();
-                }
+                    {
+                        Toast.makeText(MainActivity.this, "Please Enter a Bpm!", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
