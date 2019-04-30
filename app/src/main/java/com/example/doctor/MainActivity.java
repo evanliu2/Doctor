@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 soundPool.autoResume();
 
                 start.setEnabled(false);
+                start.setVisibility(View.INVISIBLE);
                 stop.setEnabled(true);
+                stop.setVisibility(View.VISIBLE);
 
                 //Empty?
                 if(bpm.length() != 0) {
@@ -161,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
                 if(stopped)
                 {
                     start.setEnabled(true);
+                    start.setVisibility(View.VISIBLE);
                     stop.setEnabled(false);
+                    stop.setVisibility(View.INVISIBLE);
                 }
 
             }

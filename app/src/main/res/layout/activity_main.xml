@@ -9,15 +9,19 @@
 
     <Button
         android:id="@+id/button_main_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
+        android:layout_width="119dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="140dp"
+        android:background="@drawable/buttonshape_startstop"
+        android:shadowColor="#0F8700"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="Stop"
         android:textColor="@color/lightgreen"
-        android:background="@color/darkgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
+        app:layout_constraintHorizontal_bias="0.792"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -40,15 +44,19 @@
 
     <Button
         android:id="@+id/button_main_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
+        android:layout_width="123dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="140dp"
+        android:background="@drawable/buttonshape_startstop"
+        android:shadowColor="#0F8700"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="Start"
-        android:background="@color/darkgreen"
         android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
