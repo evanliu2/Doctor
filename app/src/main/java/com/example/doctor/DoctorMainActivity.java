@@ -22,6 +22,7 @@ public class DoctorMainActivity extends AppCompatActivity {
     private CheckBox offbeats;
     private CheckBox efirst;
     private CheckBox hidecounts;
+    private CheckBox cats;
 
     private int userBpm;
     private int count;
@@ -42,6 +43,8 @@ public class DoctorMainActivity extends AppCompatActivity {
         //final MediaPlayer defaultBeat = MediaPlayer.create(this, R.raw.woodtickshort);
         final SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         final int defaultBeat = soundPool.load(this, R.raw.woodtickshort, 1);
+        final int kittenBeat = soundPool.load(this, R.raw.kittenbeat, 1);
+        final int kittenEfirst = soundPool.load(this, R.raw.kittenefirst, 1);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,18 +98,36 @@ public class DoctorMainActivity extends AppCompatActivity {
 
                                         if (count == 1 && efirst.isChecked()) {
                                             beatdisplay.setText(count + "");
-                                            soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
+
+                                                if(cats.isChecked())
+                                                    soundPool.play(kittenEfirst,1f, 1f, 0, 0, 1f);
+                                                else
+                                                soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
+
                                             count++;
-                                        } else {
+                                        }
+
+                                        else {
                                             beatdisplay.setText(count + "");
-                                            soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+
+                                                if(cats.isChecked())
+                                                    soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
+
+                                                else
+                                                    soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+
                                             count++;
                                         }
                                     }
 
                                     else {
                                         beatdisplay.setText(count + "");
-                                        soundPool.play(defaultBeat, 0.2f, 0.2f, 0, 0, 1);
+
+                                        if(cats.isChecked())
+                                            soundPool.play(kittenBeat, 0.2f, 0.2f, 0, 0, 1);
+
+                                        else
+                                            soundPool.play(defaultBeat, 0.2f, 0.2f, 0, 0, 1);
 
                                         if (count == 8) {
                                             count = 1;
@@ -120,13 +141,20 @@ public class DoctorMainActivity extends AppCompatActivity {
 
                                     if (count == 1 && efirst.isChecked()) {
                                         beatdisplay.setText(count + "");
-                                        soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
+                                        if(cats.isChecked())
+                                            soundPool.play(kittenEfirst, 1f, 1f, 0, 0, 1);
+                                        else
+                                            soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
+
                                         count++;
                                     }
 
                                     else {
                                         beatdisplay.setText(count + "");
-                                        soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+                                        if(cats.isChecked())
+                                            soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
+                                        else
+                                            soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
 
                                         if (count == 4) {
                                             count = 1;
@@ -190,6 +218,11 @@ public class DoctorMainActivity extends AppCompatActivity {
         offbeats = findViewById(R.id.checkBox_main_offbeats);
         efirst = findViewById(R.id.checkBox_main_efirst);
         hidecounts = findViewById(R.id.checkBox_main_hidecounts);
-
+        cats = findViewById(R.id.checkBox_main_cats);
     }
 }
+
+//TODO MAKE SOME KIND OF WARNING FOR THE FOLLOWING QUALITY DROPS FOR CATS
+//  DONT USE ABOVE 90 BPM
+//  DONT USE WITH OFFBEATS FUNCTION IF ABOVE 45 BPM
+//  DO NOT PLAY AROUND DOGS OR THOSE WHO BECOME ANNOYED EASILY
