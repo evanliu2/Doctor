@@ -1,42 +1,41 @@
 package com.example.doctor;
 
-import android.app.ActionBar;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class DoctorMainActivity extends AppCompatActivity {
 
     private TextView bpm;
     private TextView beatdisplay;
+
     private Button start;
     private Button stop;
+
     private CheckBox offbeats;
     private CheckBox efirst;
+    private CheckBox hidecounts;
+
     private int userBpm;
     private int count;
+
     CountDownTimer countdown;
-    public static final String TAG = MainActivity.class.getSimpleName();
+
+    public static final String TAG = DoctorMainActivity.class.getSimpleName();
+
     private boolean stopped;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.doctor_main);
 
         wireWidgets();
 
@@ -51,21 +50,31 @@ public class MainActivity extends AppCompatActivity {
                 soundPool.autoPause();
                 soundPool.autoResume();
 
-                start.setEnabled(false);
-                start.setVisibility(View.INVISIBLE);
-                stop.setEnabled(true);
-                stop.setVisibility(View.VISIBLE);
+                if(hidecounts.isChecked())
+                {
+                    beatdisplay.setVisibility(View.INVISIBLE);
+                }
+
+                else
+                {
+                    beatdisplay.setVisibility(View.VISIBLE);
+                }
 
                 //Empty?
                 if(bpm.length() != 0) {
 
                     //Too Long?
                     if (Integer.parseInt(bpm.getText().toString()) > 300) {
-                        Toast.makeText(MainActivity.this, "Yeah...No...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DoctorMainActivity.this, "Yeah...No...", Toast.LENGTH_SHORT).show();
                     }
 
                     //No? Cool
                     else {
+
+                        start.setEnabled(false);
+                        start.setVisibility(View.INVISIBLE);
+                        stop.setEnabled(true);
+                        stop.setVisibility(View.VISIBLE);
 
                         userBpm = Integer.parseInt(bpm.getText().toString());
                         final double beatsPerSec = userBpm / 60.0;
@@ -132,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onFinish() {
-                                Toast.makeText(MainActivity.this, "done!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DoctorMainActivity.this, "done!", Toast.LENGTH_SHORT).show();
                             }
                         };
 
@@ -143,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
                 else
                     {
-                        Toast.makeText(MainActivity.this, "Please Enter a Bpm!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DoctorMainActivity.this, "Please Enter a Bpm!", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -180,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         stop = findViewById(R.id.button_main_stop);
         offbeats = findViewById(R.id.checkBox_main_offbeats);
         efirst = findViewById(R.id.checkBox_main_efirst);
+        hidecounts = findViewById(R.id.checkBox_main_hidecounts);
 
     }
 }

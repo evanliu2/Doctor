@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".DoctorMainActivity"></activity>
+        <activity android:name=".ChordlistMainActivity"></activity>
+        <!--<activity android:name=".TransitionActivity"></activity>-->
+        <!--<activity android:name=".ActivityAdapter"></activity>-->
+        <activity android:name=".TitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
