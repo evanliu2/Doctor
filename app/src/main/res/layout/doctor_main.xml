@@ -75,13 +75,13 @@
     <CheckBox
         android:id="@+id/checkBox_main_offbeats"
         android:layout_width="wrap_content"
-        android:layout_height="34dp"
-        android:layout_marginBottom="72dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="68dp"
         android:text="Offbeats"
         android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintHorizontal_bias="0.277"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
@@ -99,7 +99,7 @@
         android:id="@+id/checkBox_main_hidecounts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Hide Counts"
@@ -107,22 +107,30 @@
         android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox_main_cats"
         android:layout_width="86dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="64dp"
         android:text="Cats?!"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_main_hidecounts" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_main_firstonly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="32dp"
+        android:text="First Only"
+        android:textColor="@color/lightgreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
