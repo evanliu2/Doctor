@@ -1,6 +1,7 @@
 package com.example.doctor;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.CountDownTimer;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,19 +28,20 @@ public class DoctorMainActivity extends AppCompatActivity {
     private CheckBox hidecounts;
     private CheckBox cats;
     private CheckBox firstOnly;
+    private CheckBox flash;
 
     private int userBpm;
     private int count;
 
     CountDownTimer countdown;
 
-    public static final String TAG = DoctorMainActivity.class.getSimpleName();
-
     private boolean stopped;
     private boolean proceed;
     private boolean warned;
 
     private AlertDialog.Builder aGraveMeowstake;
+
+    public static final String TAG = DoctorMainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,19 @@ public class DoctorMainActivity extends AppCompatActivity {
         final int kittenBeat = soundPool.load(this, R.raw.kittenbeat, 1);
         final int kittenEfirst = soundPool.load(this, R.raw.kittenefirst, 1);
         final int defaultBeat = soundPool.load(this, R.raw.woodtickshort, 1);
+
+        final RelativeLayout layout = (RelativeLayout) findViewById(R.id.the_id);
+
+        bpm.bringToFront();
+        beatdisplay.bringToFront();
+        start.bringToFront();
+        stop.bringToFront();
+        offbeats.bringToFront();
+        efirst.bringToFront();
+        hidecounts.bringToFront();
+        cats.bringToFront();
+        firstOnly.bringToFront();
+        flash.bringToFront();
 
         stop.setEnabled(false);
         stop.setVisibility(View.INVISIBLE);
@@ -105,12 +121,45 @@ public class DoctorMainActivity extends AppCompatActivity {
 
                                     if (offbeats.isChecked()) {
 
+                                        if(flash.isChecked())
+                                        {
+                                            if(count % 2 == 0)
+                                            {
+                                                layout.setBackgroundColor(Color.parseColor("#ffffff"));
+                                                bpm.setTextColor(Color.parseColor("#4c4c4c"));
+                                                beatdisplay.setTextColor(Color.parseColor("#4c4c4c"));
+                                                offbeats.setTextColor(Color.parseColor("#4c4c4c"));
+                                                efirst.setTextColor(Color.parseColor("#4c4c4c"));
+                                                hidecounts.setTextColor(Color.parseColor("#4c4c4c"));
+                                                cats.setTextColor(Color.parseColor("#4c4c4c"));
+                                                firstOnly.setTextColor(Color.parseColor("#4c4c4c"));
+                                                flash.setTextColor(Color.parseColor("#4c4c4c"));
+
+                                            }
+
+                                            else if(count % 2 == 1)
+                                            {
+                                                layout.setBackgroundColor(Color.parseColor("#000000"));
+                                                bpm.setTextColor(Color.parseColor("#8fff3a"));
+                                                beatdisplay.setTextColor(Color.parseColor("#8fff3a"));
+                                                offbeats.setTextColor(Color.parseColor("#8fff3a"));
+                                                efirst.setTextColor(Color.parseColor("#8fff3a"));
+                                                hidecounts.setTextColor(Color.parseColor("#8fff3a"));
+                                                cats.setTextColor(Color.parseColor("#8fff3a"));
+                                                firstOnly.setTextColor(Color.parseColor("#8fff3a"));
+                                                flash.setTextColor(Color.parseColor("#8fff3a"));
+                                            }
+
+                                        }
+
+
                                         if (count % 2 == 1) {
+
+
+                                            beatdisplay.setText(count + "");
 
                                             if (count == 1 && efirst.isChecked()) {
 
-
-                                                beatdisplay.setText(count + "");
 
                                                 if (cats.isChecked())
                                                     soundPool.play(kittenEfirst, 1f, 1f, 0, 0, 1f);
@@ -119,57 +168,169 @@ public class DoctorMainActivity extends AppCompatActivity {
                                                     soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
 
                                                 count++;
+
                                             }
 
                                             else {
+
                                                 beatdisplay.setText(count + "");
 
-                                                if (cats.isChecked())
-                                                    soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
+                                                if(count == 1)
+                                                {
+
+                                                    if (cats.isChecked())
+                                                        soundPool.play(kittenBeat, .4f, .4f, 0, 0, 1);
+
+                                                    else
+                                                        soundPool.play(defaultBeat, .4f, .4f, 0, 0, 1);
+                                                }
 
                                                 else
-                                                    soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+                                                {
+                                                    if(firstOnly.isChecked() == false)
+                                                    {
+                                                        if (cats.isChecked())
+                                                            soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
+
+                                                        else
+                                                            soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+                                                    }
+
+                                                }
 
                                                 count++;
                                             }
                                         }
 
                                         else {
-                                            beatdisplay.setText(count + "");
 
-                                            if (cats.isChecked())
-                                                soundPool.play(kittenBeat, 0.2f, 0.2f, 0, 0, 1);
+                                            if(firstOnly.isChecked() == false)
+                                            {
+                                                if (cats.isChecked())
+                                                    soundPool.play(kittenBeat, 0.2f, 0.2f, 0, 0, 1);
 
-                                            else
-                                                soundPool.play(defaultBeat, 0.2f, 0.2f, 0, 0, 1);
+                                                else
+                                                    soundPool.play(defaultBeat, 0.2f, 0.2f, 0, 0, 1);
+                                            }
 
                                             if (count == 8)
+                                            {
+                                                beatdisplay.setText(count + "");
                                                 count = 1;
+                                            }
 
                                             else
-                                                count++;
+                                                {
+                                                    beatdisplay.setText(count + "");
+                                                    count++;
+                                            }
 
                                         }
-                                    } else if (offbeats.isChecked() == false) {
+                                    }
+
+                                    else if (offbeats.isChecked() == false) {
+
+                                        beatdisplay.setText(count + "");
+
+                                        if(flash.isChecked())
+                                        {
+                                            if(count % 2 == 0)
+                                            {
+                                                layout.setBackgroundColor(Color.parseColor("#ffffff"));
+                                                bpm.setTextColor(Color.parseColor("#4c4c4c"));
+                                                beatdisplay.setTextColor(Color.parseColor("#4c4c4c"));
+                                                offbeats.setTextColor(Color.parseColor("#4c4c4c"));
+                                                efirst.setTextColor(Color.parseColor("#4c4c4c"));
+                                                hidecounts.setTextColor(Color.parseColor("#4c4c4c"));
+                                                cats.setTextColor(Color.parseColor("#4c4c4c"));
+                                                firstOnly.setTextColor(Color.parseColor("#4c4c4c"));
+                                                flash.setTextColor(Color.parseColor("#4c4c4c"));
+
+                                            }
+
+                                            else if(count % 2 == 1)
+                                            {
+                                                layout.setBackgroundColor(Color.parseColor("#000000"));
+                                                bpm.setTextColor(Color.parseColor("#8fff3a"));
+                                                beatdisplay.setTextColor(Color.parseColor("#8fff3a"));
+                                                offbeats.setTextColor(Color.parseColor("#8fff3a"));
+                                                efirst.setTextColor(Color.parseColor("#8fff3a"));
+                                                hidecounts.setTextColor(Color.parseColor("#8fff3a"));
+                                                cats.setTextColor(Color.parseColor("#8fff3a"));
+                                                firstOnly.setTextColor(Color.parseColor("#8fff3a"));
+                                                flash.setTextColor(Color.parseColor("#8fff3a"));
+                                            }
+
+                                        }
+
 
                                         if (count == 1 && efirst.isChecked()) {
-                                            beatdisplay.setText(count + "");
                                             if (cats.isChecked())
                                                 soundPool.play(kittenEfirst, 1f, 1f, 0, 0, 1);
                                             else
                                                 soundPool.play(defaultBeat, 1f, 1f, 0, 0, 1);
 
                                             count++;
-                                        } else {
+                                        }
+
+                                        else {
+
                                             beatdisplay.setText(count + "");
-                                            if (cats.isChecked())
-                                                soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
-                                            else
-                                                soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+
+                                            if(flash.isChecked())
+                                            {
+                                                if(count % 2 == 0)
+                                                {
+                                                    layout.setBackgroundColor(Color.parseColor("#ffffff"));
+                                                    bpm.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    beatdisplay.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    offbeats.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    efirst.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    hidecounts.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    cats.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    firstOnly.setTextColor(Color.parseColor("#4c4c4c"));
+                                                    flash.setTextColor(Color.parseColor("#4c4c4c"));
+
+                                                }
+
+                                                else if(count % 2 == 1)
+                                                {
+                                                    layout.setBackgroundColor(Color.parseColor("#000000"));
+                                                    bpm.setTextColor(Color.parseColor("#8fff3a"));
+                                                    beatdisplay.setTextColor(Color.parseColor("#8fff3a"));
+                                                    offbeats.setTextColor(Color.parseColor("#8fff3a"));
+                                                    efirst.setTextColor(Color.parseColor("#8fff3a"));
+                                                    hidecounts.setTextColor(Color.parseColor("#8fff3a"));
+                                                    cats.setTextColor(Color.parseColor("#8fff3a"));
+                                                    firstOnly.setTextColor(Color.parseColor("#8fff3a"));
+                                                    flash.setTextColor(Color.parseColor("#8fff3a"));
+                                                }
+
+                                            }
+
+                                            if(count == 1)
+                                            {
+                                                if (cats.isChecked())
+                                                    soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
+
+                                                else
+                                                    soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+                                            }
+
+                                            if(firstOnly.isChecked() == false)
+                                            {
+
+                                                if (cats.isChecked())
+                                                    soundPool.play(kittenBeat, 0.4f, 0.4f, 0, 0, 1);
+                                                else
+                                                    soundPool.play(defaultBeat, 0.4f, 0.4f, 0, 0, 1);
+                                            }
 
                                             if (count == 4) {
                                                 count = 1;
-                                            } else {
+                                            }
+
+                                            else {
                                                 count++;
                                             }
                                         }
@@ -202,6 +363,16 @@ public class DoctorMainActivity extends AppCompatActivity {
 
                 countdown.cancel();
                 soundPool.autoPause();
+
+                layout.setBackgroundColor(Color.parseColor("#000000"));
+                bpm.setTextColor(Color.parseColor("#8fff3a"));
+                beatdisplay.setTextColor(Color.parseColor("#8fff3a"));
+                offbeats.setTextColor(Color.parseColor("#8fff3a"));
+                efirst.setTextColor(Color.parseColor("#8fff3a"));
+                hidecounts.setTextColor(Color.parseColor("#8fff3a"));
+                cats.setTextColor(Color.parseColor("#8fff3a"));
+                firstOnly.setTextColor(Color.parseColor("#8fff3a"));
+                flash.setTextColor(Color.parseColor("#8fff3a"));
 
                 stopped = true;
 
@@ -250,8 +421,9 @@ public class DoctorMainActivity extends AppCompatActivity {
         hidecounts = findViewById(R.id.checkBox_main_hidecounts);
         cats = findViewById(R.id.checkBox_main_cats);
         firstOnly = findViewById(R.id.checkBox_main_firstonly);
+        flash = findViewById(R.id.checkBox_main_flash);
     }
 }
 
 //TODO
-//Make sure the application works without headphones
+//Check the counts to see if the app will start with gray text while on flash instead of lightgreen
